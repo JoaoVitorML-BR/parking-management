@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.estapar.challenge.parking_management.dto.WebhookEventDTO;
 import com.estapar.challenge.parking_management.service.EventProcessorService;
 
 import lombok.RequiredArgsConstructor;
@@ -19,10 +20,9 @@ public class WebhookController {
     private final EventProcessorService eventProcessor;
 
     @PostMapping
-    public ResponseEntity<Void> receiveWebhook(@RequestBody String payload) {
+    public ResponseEntity<Void> receiveWebhook(@RequestBody WebhookEventDTO event) {
         try {
-            log.info("Webhook received: {}", payload);
-            eventProcessor.process(payload);
+            eventProcessor.process(event);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             log.error("Error processing webhook", e);
