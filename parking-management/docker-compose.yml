@@ -1,4 +1,5 @@
-# docker-compose.yml
+# @format
+
 services:
   db:
     image: mysql:8.0
@@ -12,7 +13,17 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "root",
+          "-p${MYSQL_ROOT_PASSWORD}",
+        ]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -22,19 +33,15 @@ services:
     build: .
     container_name: estapar-backend
     restart: always
-    # A porta 3003 para o webhook e APIs da sua aplicação
-    ports:
-      - "3003:3003"
+    network_mode: "host"
     environment:
-      # Configurações do banco de dados para sua aplicação
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/${MYSQL_DATABASE}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/${MYSQL_DATABASE}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       SPRING_FLYWAY_ENABLED: true
-      GARAGE_SIMULATOR_BASE_URL: ${GARAGE_SIMULATOR_BASE_URL}
-      APP_WEBHOOK_URL: http://app:3003/webhook
-      SERVER_PORT: ${SERVER_PORT}
-
+      GARAGE_SIMULATOR_BASE_URL: http://localhost:3000
+      APP_WEBHOOK_URL: http://localhost:3003/webhook
+      SERVER_PORT: 3003
     depends_on:
       db:
         condition: service_healthy
@@ -42,11 +49,9 @@ services:
   simulator:
     image: cfontes0estapar/garage-sim:1.0.0
     container_name: estapar-simulator
-    ports:
-      - "8080:8080"
+    network_mode: "host"
     environment:
-      WEBHOOK_TARGET_URL: http://app:3003/webhook
-      #outras configurações para o simulador (ex: delay, etc.), elas iriam aqui.
+      EXTERNAL_API_URL: http://localhost:3003/webhook
     depends_on:
       app:
         condition: service_started
