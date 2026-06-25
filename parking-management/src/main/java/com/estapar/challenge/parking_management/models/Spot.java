@@ -19,7 +19,7 @@ public class Spot {
     @Id
     @Column(name = "id")
     private Integer id;
-    @Column(name = "sector_code")
+    @Column(name = "sector_code", nullable = false)
     private String sectorCode;
 
     @Column(name = "latitude", precision = 10, scale = 8, nullable = false)

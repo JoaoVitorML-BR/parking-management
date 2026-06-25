@@ -23,11 +23,11 @@ public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id; 
+    private UUID id;
 
     @Column(name = "spot_id", nullable = true)
     private Integer spotId;
-    
+
     @Column(name = "license_plate", nullable = false)
     private String licensePlate;
 
