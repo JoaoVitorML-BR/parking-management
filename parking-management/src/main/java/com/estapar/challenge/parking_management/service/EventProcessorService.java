@@ -19,9 +19,14 @@ public class EventProcessorService {
         log.info("Processing event: {} for board {}", eventType, plate);
 
         if ("ENTRY".equals(eventType)) {
-            // processEntry(event);
+            processEntry(event);
         } else {
             log.info("Event {} still not implemented, only logging", eventType);
         }
+    }
+
+    @Transactional
+    private void processEntry(WebhookEventDTO event) {
+        // Implement the logic to handle the entry event
     }
 }
