@@ -1,5 +1,8 @@
 package com.estapar.challenge.parking_management.repository;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,5 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.estapar.challenge.parking_management.models.Ticket;
 
 public interface TicketRepository extends JpaRepository<Ticket, UUID> {
+    Optional<Ticket> findByLicensePlateAndExitTimeIsNull(String licensePlate);
 
+    List<Ticket> findBySectorCodeAndExitTimeBetween(String sectorCode, LocalDateTime start, LocalDateTime end);
 }
