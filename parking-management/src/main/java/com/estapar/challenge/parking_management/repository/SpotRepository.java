@@ -9,5 +9,10 @@ import com.estapar.challenge.parking_management.models.Spot;
 
 public interface SpotRepository extends JpaRepository<Spot, Integer> {
     List<Spot> findBySectorCode(String sectorCode);
+
     Optional<Spot> findById(Integer id);
+
+    long countBySectorCode(String sectorCode);
+
+    long countBySectorCodeAndOccupied(String sectorCode, boolean occupied);
 }
