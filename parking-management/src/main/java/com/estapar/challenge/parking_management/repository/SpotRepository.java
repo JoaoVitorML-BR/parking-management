@@ -14,5 +14,7 @@ public interface SpotRepository extends JpaRepository<Spot, Integer> {
 
     long countBySectorCode(String sectorCode);
 
-    long countBySectorCodeAndOccupied(String sectorCode, boolean occupied);
+    long countBySectorCodeAndIsOccupiedTrue(String sectorCode);
+
+    Optional<Spot> findFirstBySectorCodeAndIsOccupiedFalse(String sectorCode);
 }
