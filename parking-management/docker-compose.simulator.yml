@@ -1,0 +1,17 @@
+# docker-compose.simulator.yml
+services:
+  simulator:
+    image: cfontes0estapar/garage-sim:1.0.0
+    container_name: estapar-simulator
+    ports:
+      - "3000:3000"
+    environment:
+      EXTERNAL_API_URL: http://host.docker.internal:3003/webhook
+    extra_hosts:
+      - "localhost:host-gateway"
+    networks:
+      - parking-management_default
+
+networks:
+  parking-management_default:
+    external: true
