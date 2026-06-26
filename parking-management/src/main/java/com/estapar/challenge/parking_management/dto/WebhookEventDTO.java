@@ -9,20 +9,20 @@ import lombok.Data;
 @Data
 public class WebhookEventDTO {
     @JsonProperty("event_type")
-    private String eventType; 
-    
+    private String eventType;
+
     @JsonProperty("license_plate")
     private String licensePlate;
-    
+
     @JsonProperty("entry_time")
     private LocalDateTime entryTime;
-    
+
     @JsonProperty("exit_time")
     private LocalDateTime exitTime;
-    
-    @JsonProperty("latitude")
+
+    @JsonProperty("lat")
     private Double lat;
-    
-    @JsonProperty("longitude")
+
+    @JsonProperty("lng")
     private Double lng;
 }
