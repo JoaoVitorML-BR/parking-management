@@ -5,15 +5,23 @@ import org.springframework.stereotype.Service;
 
 import com.estapar.challenge.parking_management.dto.WebhookEventDTO;
 
+import jakarta.transaction.Transactional;
+
 @Slf4j
 @Service
 public class EventProcessorService {
 
+    @Transactional
     public void process(WebhookEventDTO event) {
-        try {
-            log.info("Processing event: {}", event);
-        } catch (Exception e) {
-            log.error("Error processing event: {}", event, e);
+        String eventType = event.getEventType();
+        String plate = event.getLicensePlate();
+
+        log.info("Processing event: {} for board {}", eventType, plate);
+
+        if ("ENTRY".equals(eventType)) {
+            // processEntry(event);
+        } else {
+            log.info("Event {} still not implemented, only logging", eventType);
         }
     }
 }
