@@ -33,4 +33,10 @@ class ParkingPricingServiceTest {
         BigDecimal amount = service.calculateAmount(ticket, garage, 20);
         assertEquals(BigDecimal.ZERO, amount);
     }
+
+    @Test
+    void shouldReturnZeroWhenParkedExactly30Minutes() {
+        BigDecimal amount = service.calculateAmount(ticket, garage, 30);
+        assertEquals(BigDecimal.ZERO, amount);
+    }
 }
