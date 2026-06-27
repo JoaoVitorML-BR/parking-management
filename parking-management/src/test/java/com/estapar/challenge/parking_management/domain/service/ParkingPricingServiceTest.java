@@ -39,4 +39,12 @@ class ParkingPricingServiceTest {
         BigDecimal amount = service.calculateAmount(ticket, garage, 30);
         assertEquals(BigDecimal.ZERO, amount);
     }
+
+    @Test
+    void shouldChargeOneHourWhenParked31Minutes() {
+        // 31min - 30min grátis = 1min = arredonda pra 1h
+        BigDecimal amount = service.calculateAmount(ticket, garage, 31);
+        // 40.50 * 1.25 * 1 = 50.63
+        assertEquals(new BigDecimal("50.63"), amount);
+    }
 }
