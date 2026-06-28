@@ -16,20 +16,20 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/revenue")
-@Tag(name = "Revenue", description = "Consulta de faturamento por setor e data")
+@Tag(name = "Revenue", description = "Billing query by sector and date")
 public class RevenueController {
 
     private final RevenueUseCase revenueUseCase;
 
     @GetMapping
-    @Operation(summary = "Consultar faturamento", description = "Retorna a receita total de um setor em uma data específica")
+    @Operation(summary = "Check billing ", description = "Return the billing for a given date and sector")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Faturamento retornado com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Requisição inválida")
+            @ApiResponse(responseCode = "200", description = "Billing returned successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid request")
     })
     public ResponseEntity<RevenueResponseDTO> getRevenue(
-            @RequestParam @Parameter(description = "Data da consulta", example = "2026-06-26") String date,
-            @RequestParam @Parameter(description = "Setor da garagem", example = "A") String sector) {
+            @RequestParam @Parameter(description = "Date of the query", example = "2026-06-26") String date,
+            @RequestParam @Parameter(description = "Parking sector", example = "A") String sector) {
 
         RevenueRequestDTO request = new RevenueRequestDTO();
         request.setDate(date);

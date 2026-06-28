@@ -20,15 +20,15 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/webhook")
-@Tag(name = "Webhook", description = "Recebe eventos do simulador de garagem")
+@Tag(name = "Webhook", description = "Receive events from the parking simulator")
 public class WebhookController {
     private final EventProcessorService eventProcessor;
 
     @PostMapping
-    @Operation(summary = "Receber evento", description = "Aceita eventos ENTRY, PARKED e EXIT do simulador")
+    @Operation(summary = "Receive event", description = "Accepts ENTRY, PARKED and EXIT events from the simulator")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Evento processado com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Erro ao processar evento")
+            @ApiResponse(responseCode = "200", description = "Event processed successfully"),
+            @ApiResponse(responseCode = "400", description = "Error processing event")
     })
     public ResponseEntity<Void> receiveWebhook(@RequestBody WebhookEventDTO event) {
         try {
