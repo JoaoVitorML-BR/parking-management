@@ -70,7 +70,19 @@ Simulator → POST /webhook (EXIT)   → frees up space + calculates final amoun
 
 ---
 
+
+## Getting Started
+
+### Clone the repository
+
+```bash
+git clone https://github.com/seu-usuario/parking-management.git
+cd parking-management/parking-management
+```
+
 ## How to run it
+
+> All commands below must be run from the **root of the project** (`parking-management/`).
 
 ### Linux / WSL (recommended)
 
