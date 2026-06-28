@@ -9,14 +9,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 @Getter
 @AllArgsConstructor
-@Schema(description = "Resposta de faturamento")
+@Schema(description = "Billing response")
 public class RevenueResponseDTO {
-    @Schema(description = "Valor total faturado", example = "151.88")
+    @Schema(description = "Total amount billed", example = "151.88")
     private BigDecimal amount;
 
-    @Schema(description = "Moeda", example = "BRL")
+    @Schema(description = "Currency", example = "BRL")
     private String currency;
 
-     @Schema(description = "Timestamp da consulta", example = "2026-06-26T23:00:00.000Z")
+     @Schema(description = "Timestamp of the query", example = "2026-06-26T23:00:00.000Z")
     private String timestamp;
 }

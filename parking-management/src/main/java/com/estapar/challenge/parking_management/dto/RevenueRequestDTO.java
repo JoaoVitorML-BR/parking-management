@@ -6,10 +6,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Schema(description = "Requisição de consulta de faturamento")
+@Schema(description = "Billing query request")
 public class RevenueRequestDTO {
-    @Schema(description = "Data de consulta", example = "2026-06-26")
+    @Schema(description = "Date of the query", example = "2026-06-26")
     private String date;
-    @Schema(description = "Setor de consulta", example = "A")
+    @Schema(description = "Parking sector", example = "A")
     private String sector;
 }
